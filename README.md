@@ -1,4 +1,4 @@
-# Project Name
+# Spotify Friends
 
 <br>
 
@@ -6,7 +6,7 @@
 
 ## Description
 
-Search platform for restaurants in Barcelona and creating the favorite list of restaurants.
+Search platform for music available in Spotify where you can favorite and comment on songs. -Bonus: Posting these comments in a feed section where friends can interact.
 
 
 
@@ -16,14 +16,15 @@ Search platform for restaurants in Barcelona and creating the favorite list of r
 
 - **404** - As a user I want to see a nice 404 page when I go to a page that doesn’t exist so that I know it was my fault
 - **500** - As a user I want to see a nice error page when the super team screws it up so that I know that is not my fault
-- **homepage** - As a user I want to be able to access the homepage and filter by type of restaurant, log in and sign up. 
-- **sign up** - As a user I want to sign up on the web page so that I can add favorite restaurants to my list.
+- **homepage** - As a user I want to be able to access the homepage and filter by artist, then albums then songs, preview the songs, log in and sign up.
+- **sign up** - As a user I want to sign up on the web page so that I can add favorite songs to my list and comment.
 - **login** - As a user I want to be able to log in on the web page so that I can get back to my account
 - **logout** - As a user I want to be able to log out from the web page so that I can make sure no one will access my account
-- **favorite list** - As a user I want to see the list of my favorite and delete them.
-- **edit user** - As a user I want to be able to edit my profile.
-- **result** - As a user I want to see the list of restaurant filter by my preferences.
-- **restaurant listing** - As a user I want to see more details of the restaurant, be able to call them and visit their website and save it as favorites.
+- **favorite list** - As a user I want to see the list of my favorites and delete them.
+- **comments list** - As a user I want to see the list of my comments in songs and delete them.
+- **edit user** - As a user I want to be able to edit my profile; profile picture with a default anonymous one.
+- **result** - As a user I want to see the list of artist filter by name.
+- **artists listing** - As a user I want to see more details of the artist, be able to view their albums and songs and save it as favorites.
 
 
 
@@ -39,16 +40,18 @@ Search platform for restaurants in Barcelona and creating the favorite list of r
 | ---------- | ---------------------------------- | ------------------------------------------------------------ | -------------------------------------------------------- |
 | `GET`      | `/`                                | Main page route.  Renders home `index` view.                 |                                                          |
 | `GET`      | `/login`                           | Renders `login` form view.                                   |                                                          |
-| `POST`     | `/login`                           | Sends Login form data to the server.                         | { email, password }                                      |
+| `POST`     | `/login`                           | Sends Login form data to the server.                         | { username, password }                                      |
 | `GET`      | `/signup`                          | Renders `signup` form view.                                  |                                                          |
-| `POST`     | `/signup`                          | Sends Sign Up info to the server and creates user in the DB. | {  email, password  }                                    |
+| `POST`     | `/signup`                          | Sends Sign Up info to the server and creates user in the DB. | {  username, password  }                                    |
 | `GET`      | `/private/edit-profile`            | Private route. Renders `edit-profile` form view.             |                                                          |
-| `PUT`      | `/private/edit-profile`            | Private route. Sends edit-profile info to server and updates user in DB. | { email, password, [firstName], [lastName], [imageUrl] } |
+| `PUT`      | `/private/edit-profile`            | Private route. Sends edit-profile info to server and updates user in DB. | { username, password, [firstName], [lastName], [imageUrl] } |
 | `GET`      | `/private/favorites`               | Private route. Render the `favorites` view.                  |                                                          |
-| `POST`     | `/private/favorites/`              | Private route. Adds a new favorite for the current user.     | { name, cuisine, city, }                                 |
-| `DELETE`   | `/private/favorites/:restaurantId` | Private route. Deletes the existing favorite from the current user. |                                                          |
-| `GET`      | `/restaurants`                     | Renders `restaurant-list` view.                              |                                                          |
-| `GET`      | `/restaurants/details/:id`         | Renders `restaurant-details` view for the particular restaurant. |                                                          |
+| `POST`     | `/private/favorites/`              | Private route. Adds a new favorite for the current user.     | { songName, artist, album, songUrl }                                 |
+| `DELETE`   | `/private/favorites/:songId` | Private route. Deletes the existing favorite from the current user. |                                                          |
+| `GET`      | `/artistList`                     | Renders `artist-list` view.                              |                                                          |
+| `GET`      | `/artistList/:artistId`         | Renders `artist-list-albums` view for the particular artist. |                                                          |
+| `GET`      | `/artistList/:artistId/:albumId`         | Renders `albums-list-songs` view for the particular album. |                                                          |
+| `POST`      | `/artistList/:artistId/:albumId/:songId`         | Sends favorite song to favorite list OR song comment to comment list. + redirects to profile |                                                          |
 
 
 
@@ -63,20 +66,32 @@ User model
 ```javascript
 {
   name: String,
-  email: String,
+  username: String,
   password: String,
   favorites: [FavoriteId],
+  comments: String
 }
 
 ```
-
 
 
 Favorites model
 
 ```javascript
 {
-  placeId: String,
+  songId: String,
+
+}
+
+```
+
+Comments model **after MVP**
+
+```javascript
+{
+  songId: String,
+  content: String
+  
 }
 
 ```
