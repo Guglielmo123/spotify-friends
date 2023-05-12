@@ -44,7 +44,7 @@ require("./config")(app);
 const capitalize = require("./utils/capitalize");
 const projectName = "Spotify friends";
 
-app.locals.appTitle = `${capitalize(projectName)} - search for your favourite Artists 👩‍🎨🔍`;
+app.locals.appTitle = `${capitalize(projectName)} - search for your favourite Artists, Albums or Songs 👩‍🎨🔍`;
 
 // 👇 Start handling routes here
 const indexRoutes = require("./routes/index.routes");
