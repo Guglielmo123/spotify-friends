@@ -114,6 +114,7 @@ express-session
 mongoose
 handlebars 
 middleware 
+cloudinary for image profile user 
 
 
 <br>
