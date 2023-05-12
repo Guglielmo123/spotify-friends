@@ -90,7 +90,7 @@ Comments model **after MVP**
 ```javascript
 {
   songId: String,
-  content: String
+  comment: String
   
 }
 
@@ -101,13 +101,19 @@ Comments model **after MVP**
 <br>
 
 ## API's
-
+SpotifyWebApi 
 
 <br>
 
 
 ## Packages
-
+Package JSON
+npm packages 
+express
+express-session 
+mongoose
+handlebars 
+middleware 
 
 
 <br>
@@ -116,7 +122,7 @@ Comments model **after MVP**
 
 ## Backlog
 
-[See the Trello board.](https://trello.com/b/Ni3giVKf/ironhackproject)
+[See the Trello board.](https://trello.com/b/ZySTWtTc/spotify-friends)
 
 
 
@@ -132,23 +138,28 @@ Comments model **after MVP**
 
 The url to your repository and to your deployed project
 
-[Repository Link]()
+[Repository Link](https://github.com/Guglielmo123/spotify-friends)
 
-[Deploy Link]()
+[Deploy Link](n.a.)
 
 
 
 <br>
 
+## Colors 
+(https://usbrandcolors.com/spotify-colors/)
+
+Spotify Green: RGB:	30 215 96
+Spotify Black: RGB:	25 20 20
 
 
 ### Slides
 
 The url to your presentation slides
 
-[Slides Link](https://docs.google.com/presentation/d/1P5FIi0vHZBUcgUtmt1M4_lLCO5dwdJ4UOgtJa4ehGfk/edit?usp=sharing)
+[Slides Link](https://docs.google.com/presentation/d/1C_MynniXmOCdgxEZ_D9Usl6h5UWw_6paR3F2NT2nkgo/edit?usp=sharing)
 
 ### Contributors
-FirstName LastName - [`<github-username>`](https://github.com/person1-username) - [`<linkedin-profile-link>`](https://www.linkedin.com/in/person1-username)
+Guglielmo Galasso - [`<github-username>`](https://gist.github.com/Guglielmo123) - [`<linkedin-profile-link>`](https://www.linkedin.com/in/guglielmo-galasso/)
 
-FirstName LastName - [`<github-username>`](https://github.com/person2-username) - [`<linkedin-profile-link>`](https://www.linkedin.com/in/person2-username)
+Victoria Avelar - [`<github-username>`](https://github.com/avelarvicky) - [`<linkedin-profile-link>`](https://www.linkedin.com/in/victoria-avelar-16b041275/)
