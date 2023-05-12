@@ -48,11 +48,15 @@ Search platform for music available in Spotify where you can favorite and commen
 | `GET`      | `/private/favorites`               | Private route. Render the `favorites` view.                  |                                                          |
 | `POST`     | `/private/favorites/`              | Private route. Adds a new favorite for the current user.     | { songName, artist, album, songUrl }                                 |
 | `DELETE`   | `/private/favorites/:songId` | Private route. Deletes the existing favorite from the current user. |                                                          |
-| `GET`      | `/artistList`                     | Renders `artist-list` view.                              |                                                          |
-| `GET`      | `/artistList/:artistId`         | Renders `artist-list-albums` view for the particular artist. |                                                          |
-| `GET`      | `/artistList/:artistId/:albumId`         | Renders `albums-list-songs` view for the particular album. |                                                          |
+| `GET`      | `/artistList`                     | Renders `artist-search` view.                              |                                                          |
+| `GET`      | `/albums/:artistId`         | Renders `artist-search-albums` view for the particular artist. |                                                          |
+| `GET`      | `/album-tracks/:artistId`         | Renders `albums-list-songs` view for the particular album. |                                                          |
 | `POST`      | `/artistList/:artistId/:albumId/:songId`         | Sends favorite song to favorite list OR song comment to comment list. + redirects to profile |                                                          |
 
+post - comment
+delete - comment
+post - add favourite
+put - remove favourite
 
 
 
@@ -65,11 +69,12 @@ User model
 
 ```javascript
 {
-  name: String,
   username: String,
+  email: String,
   password: String,
-  favorites: [FavoriteId],
-  comments: String
+  favorites: [type.ObjectId ref"Favourite"]
+  comments: [type.ObjectId ref"Comment"]
+  friends: [type.ObjectId ref"User"]
 }
 
 ```
@@ -80,7 +85,18 @@ Favorites model
 ```javascript
 {
   songId: String,
+  albumId: String,
+  artistId: String
 
+  favType: {
+    type: enum["artits", "album", "song"]
+  }
+
+  previewUrl: String,
+  name: String
+  imge: String
+
+  comments: [type.ObjectId ref"comment"]
 }
 
 ```
@@ -89,7 +105,11 @@ Comments model **after MVP**
 
 ```javascript
 {
-  songId: String,
+   songId: String,
+  albumId: String,
+  artistId: String
+
+  author: ObjectId
   comment: String
   
 }
@@ -107,14 +127,7 @@ SpotifyWebApi
 
 
 ## Packages
-Package JSON
-npm packages 
-express
-express-session 
-mongoose
-handlebars 
-middleware 
-cloudinary for image profile user 
+cloudinary 
 
 
 <br>
