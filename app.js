@@ -2,29 +2,6 @@
 // https://www.npmjs.com/package/dotenv
 require("dotenv").config();
 
-// Require SpotifyAPI
-const SpotifyWebApi = require('spotify-web-api-node');
-
-
-// get your credentials from .env file using process.env
-// CLIENT_ID and CLIENT_SECRET are the variable names we gave in .env file (don't forget to create .env file!!!)
-//      |           |
-//      --------------------------------------------|
-//                                                  |
-const spotifyApi = new SpotifyWebApi({
-    //           |
-    clientId: process.env.CLIENT_ID, // <-------------|
-    clientSecret: process.env.CLIENT_SECRET // <------|
-  });
-  
-  // ******************** Retrieve an access token: **********************
-  spotifyApi
-    .clientCredentialsGrant()
-    .then(data => spotifyApi.setAccessToken(data.body['access_token']))
-    .catch(error => console.log('Something went wrong when retrieving an access token', error));
-
-
-
 // ℹ️ Connects to the database
 require("./db");
 
@@ -50,11 +27,23 @@ app.locals.appTitle = `${capitalize(projectName)} - search for your favourite Ar
 const indexRoutes = require("./routes/index.routes");
 app.use("/", indexRoutes);
 
+const spotifyRoutes = require("./routes/spotify.routes");
+app.use("/", spotifyRoutes);
+
 const authRoutes = require("./routes/auth.routes");
 app.use("/auth", authRoutes);
+
+
+/* 
+app.get('/artist', (req, res) => {
+  // Handle the request logic for /artist route here
+  // This could include retrieving data from the Spotify API, rendering a template, etc.
+  // For testing purposes, you can simply send a response back
+  res.send('This is the artist route');
+});
+ */
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 
 module.exports = app;
-module.exports.spotifyApi = spotifyApi;
