@@ -43,14 +43,14 @@ Search platform for music available in Spotify where you can favorite and commen
 | `POST`     | `/login`                           | Sends Login form data to the server.                         | { username, password }                                      |
 | `GET`      | `/signup`                          | Renders `signup` form view.                                  |                                                          |
 | `POST`     | `/signup`                          | Sends Sign Up info to the server and creates user in the DB. | {  username, password  }                                    |
-| `GET`      | `/private/edit-profile`            | Private route. Renders `edit-profile` form view.             |                                                          |
-| `PUT`      | `/private/edit-profile`            | Private route. Sends edit-profile info to server and updates user in DB. | { username, password, [firstName], [lastName], [imageUrl] } |
-| `GET`      | `/private/favorites`               | Private route. Render the `favorites` view.                  |                                                          |
-| `POST`     | `/private/favorites/`              | Private route. Adds a new favorite for the current user.     | { songName, artist, album, songUrl }                                 |
-| `DELETE`   | `/private/favorites/:songId` | Private route. Deletes the existing favorite from the current user. |                                                          |
-| `GET`      | `/artistList`                     | Renders `artist-search` view.                              |                                                          |
-| `GET`      | `/albums/:artistId`         | Renders `artist-search-albums` view for the particular artist. |                                                          |
-| `GET`      | `/album-tracks/:artistId`         | Renders `albums-list-songs` view for the particular album. |                                                          |
+| `GET`      | `/edit-profile`            | Private route. Renders `edit-profile` form view.             |                                                          |
+| `PUT`      | `/edit-profile`            | Private route. Sends edit-profile info to server and updates user in DB. | { username, password, [firstName], [lastName], [imageUrl] } |
+| `GET`      | `/favorites`               | Private route. Render the `favorites` view.                  |                                                          |
+| `POST`     | `/favorites/`              | Private route. Adds a new favorite for the current user.     | { songName, artist, album, songUrl }                                 |
+| `DELETE`   | `/favorites/:songId` | Private route. Deletes the existing favorite from the current user. |                                                          |
+| `GET`      | `/artist`                     | Renders `artist-search` view.                              |                                                          |
+| `GET`      | `/album`         | Renders `album-search` view for the particular artist. |                                                          |
+| `GET`      | `/song`         | Renders `song-search` view for the particular album. |                                                          |
 | `POST`      | `/artistList/:artistId/:albumId/:songId`         | Sends favorite song to favorite list OR song comment to comment list. + redirects to profile |                                                          |
 
 post - comment

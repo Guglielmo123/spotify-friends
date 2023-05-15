@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { spotifyApi } = require("../config/spotify.config"); // Adjust the path if needed
 
+// searching for artists
 router.get("/artist", async (req, res) => {
 	try {
 		let response = await spotifyApi.searchArtists(req.query.characters);
@@ -13,6 +14,35 @@ router.get("/artist", async (req, res) => {
 		console.error(error);
 	}
 });
+
+// going to albums of specific artist
+router.get("/albums/:artistId", async (req, res, next) => {
+  try {
+    let response = await spotifyApi.getArtistAlbums(req.params.artistId);
+
+    console.log(response.body.items);
+
+    res.render("artists/albums", { result: response.body.items });
+
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// going to tracks of specific album
+router.get("/album-tracks/:albumId", async (req, res) => {
+  try {
+    let response = await spotifyApi.getAlbumTracks(req.params.albumId);
+
+    //console.log(response.body.items);
+
+    res.render("artists/album-tracks", { result: response.body.items });
+
+  } catch (err) {
+    console.error("The error while searching album tracks occurred: ", err);
+  }
+});
+
 
 router.get("/album", async (req, res) => {
 	try {
