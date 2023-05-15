@@ -23,7 +23,7 @@ router.get("/album", async (req, res) => {
       let sortedAlbums = response.body.albums.items
       sortedAlbums.sort((a, b) => a.name.localeCompare(b.name))
  
-      let filteredAlbums = []
+      let filteredAlbums = [];
       for (let i =0; i<sortedAlbums.length - 1; i++){
           if (sortedAlbums[i].name !== sortedAlbums[i+1].name){
               filteredAlbums.push(sortedAlbums[i])
@@ -59,10 +59,18 @@ router.get("/albums/:artistId", async (req, res, next) => {
       let response = await spotifyApi.getArtistAlbums(req.params.artistId);
   
       //console.log(response.body.items);
-
+      let sortedAlbums = response.body.items
+      sortedAlbums.sort((a, b) => a.name.localeCompare(b.name))
+ 
+      let filteredAlbums = [];
+      for (let i =0; i<sortedAlbums.length - 1; i++){
+          if (sortedAlbums[i].name !== sortedAlbums[i+1].name){
+              filteredAlbums.push(sortedAlbums[i])
+            }
+        }
     
   
-      res.render("artists/albums", { result: response.body.items });
+      res.render("artists/albums", { result: filteredAlbums });
   
     } catch (error) {
       console.log(error);
@@ -75,8 +83,8 @@ router.get("/albums/:artistId", async (req, res, next) => {
       let response = await spotifyApi.getAlbumTracks(req.params.albumId);
       //console.log(response.body);
 
-
-      res.render("artists/album-tracks", { result: filteredAlbums });
+        console.log(response.body.items) // filteredAlbums was here previously 
+      res.render("artists/album-tracks", { result: response.body.items });
   
     } catch (err) {
       console.error("The error while searching album tracks occurred: ", err);
