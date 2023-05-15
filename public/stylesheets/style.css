@@ -110,7 +110,15 @@ margin-top: 5px;
   width: inherit;
   margin-top: 20px;
   
-  
+}
+.images-songs{
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  display: grid;
+  margin-left: 45vw;
+  margin: 10px 0px;
 
 
 }
