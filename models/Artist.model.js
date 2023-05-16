@@ -3,12 +3,10 @@ const { Schema, model } = require("mongoose");
 // TODO: Please make sure you edit the User model to whatever makes sense in this case
 const artistSchema = new Schema(
   {
-   name: String,
-   images: Array, 
-   genres: Array, 
-   external_urls: String,
-   
-
+   name: {type: String},
+   images: {type: Array},
+   genres: {type: Array},
+   external_urls: {type: String}
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`

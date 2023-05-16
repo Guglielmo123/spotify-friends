@@ -3,5 +3,8 @@
     <img  class="images-songs" src={{this.images.0.url}} alt="" width="200" height="200">
     <h2>{{this.name}}</h2>
     <a href="/albums/{{this.id}}">View Albums</a> 
+    <form action="/favourites/{{this.id}}" method="post">
+        <button type="submit" class="btn btn-warning">Add to Favourites</button>
+    </form> 
     {{/each}}
 </div>

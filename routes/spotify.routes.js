@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-let Artist = require('../models/Artist.model')
+let Artist = require('../models/Artist.model');
+let User = require('../models/User.model')
 const { spotifyApi } = require("../config/spotify.config"); // Adjust the path if needed
 
 // searching for artists
@@ -114,6 +115,34 @@ for (let i =0; i<sortedAlbums.length - 1; i++){
       console.error("The error while searching album tracks occurred: ", err);
     }
   });
+
+router.post('/favourites/:artistId', (req,res)=>{
+  const {artistId} = req.params;
+
+  async function createFavArtist(){
+    try{
+      let foundArtist = await spotifyApi.getArtist(artistId);
+      let name = foundArtist.body.name;
+      let images = foundArtist.body.images;
+      let genres = foundArtist.body.genres;
+      let external_urls = foundArtist.body.external_urls.spotify;
+      const newArtist = await Artist.create({name, images, genres, external_urls});
+
+      let currentUser = req.session.currentUser;
+      await User.findByIdAndUpdate(currentUser._id, {$push: {favourites: newArtist._id}})
+    }
+    catch(error){
+      console.log(error);
+    }
+  }
+
+  createFavArtist();
+
+
+
+
+
+})
 
 /*   router.post("/artists/addFavs/:id", async (req, res, next) => {
     const { id } = req.params;
