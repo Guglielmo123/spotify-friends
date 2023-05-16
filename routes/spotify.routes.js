@@ -1,19 +1,32 @@
 const express = require("express");
 const router = express.Router();
+let Artist = require('../models/Artist.model')
 const { spotifyApi } = require("../config/spotify.config"); // Adjust the path if needed
 
 // searching for artists
 router.get("/artist", async (req, res) => {
 	try {
 		let response = await spotifyApi.searchArtists(req.query.characters);
+    const artistData = response.body.artists.items
+
+for (const artistInfo of artistData) {
+  const artist = new Artist({
+    name: artistInfo.name, images: artistInfo.images, genres: artistInfo.genres, external_urls: artistInfo.external_urls.spotify
+  })
+  await artist.save()
+}
+
+
 		res.render("artists/artist-search.hbs", {
-			result: response.body.artists.items,
+			result: response.body.artists.items, artistData
 		});
 		//console.log(response.body.artists.items)
 	} catch (error) {
 		console.error(error);
 	}
 });
+
+
 
 router.get("/album", async (req, res) => {
 	try {
@@ -30,7 +43,7 @@ router.get("/album", async (req, res) => {
             }
         }
         
-        console.log("F: " + filteredAlbums.length, "A: " + response.body.albums.items.length)
+        //console.log("F: " + filteredAlbums.length, "A: " + response.body.albums.items.length)
 
 		res.render("artists/album-search.hbs", {
 			result: filteredAlbums /* response.body.albums.items */,
@@ -94,7 +107,7 @@ for (let i =0; i<sortedAlbums.length - 1; i++){
       }
   }
 
-      console.log(response.body.items) // filteredAlbums was here previously 
+     // console.log(response.body.items) // filteredAlbums was here previously 
       res.render("artists/album-tracks", { result: response.body.items });
   
     } catch (err) {
