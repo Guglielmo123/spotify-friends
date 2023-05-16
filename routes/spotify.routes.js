@@ -83,7 +83,18 @@ router.get("/albums/:artistId", async (req, res, next) => {
       let response = await spotifyApi.getAlbumTracks(req.params.albumId);
       //console.log(response.body);
 
-        console.log(response.body.items) // filteredAlbums was here previously 
+//console.log(response.body.items);
+let sortedAlbums = response.body.items
+sortedAlbums.sort((a, b) => a.name.localeCompare(b.name))
+
+let filteredAlbums = [];
+for (let i =0; i<sortedAlbums.length - 1; i++){
+    if (sortedAlbums[i].name !== sortedAlbums[i+1].name){
+        filteredAlbums.push(sortedAlbums[i])
+      }
+  }
+
+      console.log(response.body.items) // filteredAlbums was here previously 
       res.render("artists/album-tracks", { result: response.body.items });
   
     } catch (err) {
