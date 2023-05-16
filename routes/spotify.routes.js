@@ -130,17 +130,17 @@ router.post('/favourites/:artistId', (req,res)=>{
 
       let currentUser = req.session.currentUser;
       await User.findByIdAndUpdate(currentUser._id, {$push: {favourites: newArtist._id}})
+    // Redirect to the favorites page with a success message
+    res.redirect('/favorites?added=true');
+  
     }
     catch(error){
       console.log(error);
+
     }
   }
 
   createFavArtist();
-
-
-
-
 
 })
 
