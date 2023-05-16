@@ -115,4 +115,68 @@ for (let i =0; i<sortedAlbums.length - 1; i++){
     }
   });
 
+/*   router.post("/artists/addFavs/:id", async (req, res, next) => {
+    const { id } = req.params;
+    const currentUser = req.session.currentUser._id;
+    try {
+      console.log(id);
+      const favouriteArtist = await User.findByIdAndUpdate(currentUser, {
+        $push: { favourites: id },
+      });
+      res.redirect(`/artists/details/${id}`);
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  });
+  
+  router.post("/artists/removeFavs/:id", async (req, res, next) => {
+    const { id } = req.params;
+    const currentUser = req.session.currentUser._id;
+    try {
+      const favouriteArtist = await User.findByIdAndUpdate(currentUser, {
+        $pull: { favourites: id },
+      });
+      res.redirect(`/artists/details/${id}`);
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  });
+  
+  router.post("/favorites/:spotId", async (req, res) => {
+    try {
+      const { spotId } = req.params;
+      const favoriteSpot = await Country.findById(spotId);
+  
+      const userId = req.session.currentUser._id; // Replace with your actual code to retrieve the user ID
+  
+      await User.findByIdAndUpdate(userId, {
+        $push: { favourites: favoriteSpot._id },
+      });
+  
+      res.redirect("/profile");
+    } catch (error) {
+      console.log(error);
+      return res.render("error.hbs", { error: "Internal server error" });
+    }
+  });
+  
+  router.post("/favorites/:id/delete", async (req, res) => {
+    try {
+      const favoriteId = req.params.id;
+      const userId = req.session.currentUser._id; // Replace with your actual code to retrieve the user ID
+  
+      await User.findByIdAndUpdate(userId, {
+        $pull: { favourites: favoriteId },
+      });
+  
+      res.redirect("/profile");
+    } catch (error) {
+      console.log(error);
+      return res.render("error.hbs", { error: "Internal server error" });
+    }
+  });
+
+ */
 module.exports = router;
