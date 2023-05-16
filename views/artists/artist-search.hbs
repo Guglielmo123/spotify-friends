@@ -1,4 +1,38 @@
-<div >
+<div>
+  {{#each result}}
+    <img class="images-songs" src={{this.images.0.url}} alt="" width="200" height="200">
+    <h2>{{this.name}}</h2>
+    <a href="/albums/{{this.id}}">View Albums</a> 
+
+    {{#if isInFavorites}}
+      <p>Added to Favorites</p>
+    {{else}}
+      <form action="/favourites/{{this.id}}" method="post">
+        <button type="submit" class="btn btn-warning">Add to Favorites</button>
+      </form>
+    {{/if}}
+  {{/each}}
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{{!-- <div >
     {{#each result}}
     <img  class="images-songs" src={{this.images.0.url}} alt="" width="200" height="200">
     <h2>{{this.name}}</h2>
@@ -14,4 +48,4 @@
    
 {{/each}}
 
-</div>
+</div> --}}

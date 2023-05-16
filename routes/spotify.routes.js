@@ -8,25 +8,30 @@ const { spotifyApi } = require("../config/spotify.config"); // Adjust the path i
 router.get("/artist", async (req, res) => {
 	try {
 		let response = await spotifyApi.searchArtists(req.query.characters);
-    const artistData = response.body.artists.items
 
-for (const artistInfo of artistData) {
-  const artist = new Artist({
-    name: artistInfo.name, images: artistInfo.images, genres: artistInfo.genres, external_urls: artistInfo.external_urls.spotify
-  })
-  await artist.save()
-}
+// Add the `isInFavorites` property to each artist
+let currentUser = req.session.currentUser;
+const myUser = await User.findById(currentUser._id)
+let isFav = myUser.favourites
 
+
+/* let isInFavorites;
+
+const favouriteIds = isFav.map(fav => fav._id);
+const artistsIds = response.body.artists.items.map(artist => ({
+  ...artist,
+  isInFavorites: favouriteIds.includes(artist.id)
+}));
+ */
 
 		res.render("artists/artist-search.hbs", {
-			result: response.body.artists.items, artistData
-		});
+			result: response.body.artists.items
+		}); 
 		//console.log(response.body.artists.items)
 	} catch (error) {
 		console.error(error);
 	}
 });
-
 
 
 router.get("/album", async (req, res) => {
@@ -131,7 +136,7 @@ router.post('/favourites/:artistId', (req,res)=>{
       let currentUser = req.session.currentUser;
       await User.findByIdAndUpdate(currentUser._id, {$push: {favourites: newArtist._id}})
     // Redirect to the favorites page with a success message
-    res.redirect('/favorites?added=true');
+    res.redirect('back');
   
     }
     catch(error){
