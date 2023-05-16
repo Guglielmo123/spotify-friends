@@ -153,4 +153,14 @@ router.get("/logout", isLoggedIn, (req, res) => {
   });
 });
 
+router.get("/profile", isLoggedIn, (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      res.status(500).render("auth/logout", { errorMessage: err.message });
+      return;
+    }
+    res.render("auth/profile");
+  });
+});
+
 module.exports = router;
