@@ -8,11 +8,17 @@ const { spotifyApi } = require("../config/spotify.config"); // Adjust the path i
 router.get("/artist", async (req, res) => {
 	try {
 		let response = await spotifyApi.searchArtists(req.query.characters);
-
 		// Add the `isInFavorites` property to each artist
 		let currentUser = req.session.currentUser;
-		const myUser = await User.findById(currentUser._id);
-		let isFav = myUser.favourites;
+		const myUser = await User.findById(currentUser._id).populate("favourites")
+		
+for (let i=0; i<response.body.artists.items.length; i++){
+for (let j=0; j<myUser.favourites.length; j++){
+  if (myUser.favourites[j].name === response.body.artists.items[i].name){
+    response.body.artists.items[i].isInFavorites = true
+  }
+}
+}
 
 		/* let isInFavorites;
 
@@ -24,7 +30,7 @@ const artistsIds = response.body.artists.items.map(artist => ({
  */
 
 		res.render("artists/artist-search.hbs", {
-			result: response.body.artists.items,
+			result: response.body.artists.items, logged: req.session.currentUser 
 		});
 		//console.log(response.body.artists.items)
 	} catch (error) {
@@ -50,7 +56,7 @@ router.get("/album", async (req, res) => {
 		//console.log("F: " + filteredAlbums.length, "A: " + response.body.albums.items.length)
 
 		res.render("artists/album-search.hbs", {
-			result: filteredAlbums /* response.body.albums.items */,
+			result: filteredAlbums /* response.body.albums.items */, logged: req.session.currentUser 
 		});
 	} catch (error) {
 		console.error(error);
@@ -63,7 +69,7 @@ router.get("/song", async (req, res) => {
 		//console.log(response.body.tracks.items[0].album.images)
 
 		res.render("artists/song-search.hbs", {
-			result: response.body.tracks.items,
+			result: response.body.tracks.items,logged: req.session.currentUser 
 		});
 	} catch (error) {
 		console.error(error);
@@ -86,7 +92,7 @@ router.get("/albums/:artistId", async (req, res, next) => {
 			}
 		}
 
-		res.render("artists/albums", { result: filteredAlbums });
+		res.render("artists/albums", { result: filteredAlbums, logged: req.session.currentUser  });
 	} catch (error) {
 		console.log(error);
 	}
@@ -110,20 +116,20 @@ router.get("/album-tracks/:albumId", async (req, res) => {
 		}
 
 		// console.log(response.body.items) // filteredAlbums was here previously
-		res.render("artists/album-tracks", { result: response.body.items });
+		res.render("artists/album-tracks", { result: response.body.items , logged: req.session.currentUser });
 	} catch (err) {
 		console.error("The error while searching album tracks occurred: ", err);
 	}
 });
 
-router.post("/favourites/:artistId", (req, res) => {
+router.post("/favorites/:artistId", (req, res) => {
 	const { artistId } = req.params;
 
 	async function createFavArtist() {
 		try {
 			let foundArtist = await spotifyApi.getArtist(artistId);
 			let name = foundArtist.body.name;
-			let images = foundArtist.body.images;
+			let images = foundArtist.body.images[0].url;
 			let genres = foundArtist.body.genres;
 			let external_urls = foundArtist.body.external_urls.spotify;
 			const newArtist = await Artist.create({
@@ -147,16 +153,19 @@ router.post("/favourites/:artistId", (req, res) => {
 	createFavArtist();
 });
 
-router.post("/favourites/:artistId/delete", (req, res) => {
-	const { artistId } = req.params;
+router.post("/favorites-delete/:artistName", (req, res) => {
+	const { artistName } = req.params;
 
 	async function deleteArtistFromDb() {
 		try {
-			const deletedArtist = await Artist.findByIdAndRemove(artistId);
+			const allArtists = await Artist.find()
+      const selectedArtist = allArtists.filter((artist) => artist.name === artistName)
+
+console.log(selectedArtist)
 
 			let currentUser = req.session.currentUser;
 			await User.findByIdAndUpdate(currentUser._id, {
-				$pull: { favourites: deletedArtist._id },
+				$pull: { favourites: selectedArtist[0]._id },
 			});
 
 			res.redirect("back");
@@ -169,7 +178,7 @@ router.post("/favourites/:artistId/delete", (req, res) => {
 
 // CREATE a new artist - display the form
 router.get('/artists/create', (req, res)=>{
-  res.render('artists/artist-create.hbs')
+  res.render('artists/artist-create.hbs', {logged: req.session.currentUser })
 })
 
 // POST route to save the artist to the database
@@ -178,7 +187,7 @@ router.post('/artists/create', (req, res)=> {
 
   async function createArtistInDb(){
     try {
-      let createdArtist = await Artist.create({name, genres, description, images})
+      let createdArtist = await Artist.create({name, genres, description, images, userCreated: true})
       res.redirect('/artists');
     }
     catch(error) {
@@ -192,7 +201,9 @@ router.post('/artists/create', (req, res)=> {
 router.get('/artists', async (req, res)=> {
   try {
     let allArtists = await Artist.find();
-    res.render('artists/artist-list', {artists: allArtists})
+    let filteredArtists = allArtists.filter((artist) => artist.userCreated)
+
+    res.render('artists/artist-list', {artists: filteredArtists, logged: req.session.currentUser })
   } catch (error) {
     console.log(error)
   }

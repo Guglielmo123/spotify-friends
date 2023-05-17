@@ -7,14 +7,15 @@
 
     {{#if isInFavorites}}
     <p>Added to Favorites</p>
+	  <form action="/favorites-delete/{{this.name}}" method="post">
+      <button type="submit">Delete from Favorites</button>
+    </form>
     {{else}}
     <form action="/favorites/{{this.id}}" method="post">
       <button type="submit" class="btn btn-warning">Add to Favorites</button>
     </form>
     {{/if}}
-    <form action="/favorites/{{this.id}}/delete" method="post">
-      <button type="submit">Delete from Favorites</button>
-    </form>
+  
   </figure>
   {{/each}}
 </div>

@@ -7,7 +7,11 @@ const artistSchema = new Schema(
    images: {type: String},
    genres: {type: Array},
    description: {type: String},
-   external_urls: {type: String}
+   external_urls: {type: String},
+   userCreated: {
+    type: Boolean,
+    default: false
+   }
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`
