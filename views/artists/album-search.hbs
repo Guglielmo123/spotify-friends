@@ -1,8 +1,50 @@
-{{#each result}}
-  <h1>{{this.name}}</h1>
-  <img src={{this.images.0.url}} alt="" />
-  <p>Total Album Tracks: {{this.total_tracks}}</p>
-  <p>By: {{this.artists.0.name}}</p>
+<style>
+  /* Grid container */
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    align-items: center; /* Center align items vertically */
+  }
 
-  <a href="/album-tracks/{{id}}">View Songs</a>
-{{/each}}
+  /* Grid item */
+  .grid-item {
+    background-color: inherit;
+    padding: 20px;
+    text-align: center;
+    color: black;
+  }
+
+  /* Image container */
+  .grid-item .image-container {
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%; /* Maintain aspect ratio of 1:1 for squared images */
+    position: relative;
+  }
+
+  /* Image styles */
+  .grid-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+</style>
+
+<div class="grid-container">
+  {{#each result}}
+  <div class="grid-item">
+    <h6>{{this.name}}</h6>
+    <div class="image-container">
+      <img src={{this.images.0.url}} alt="" />
+    </div>
+    <p>Total Album Tracks: {{this.total_tracks}}</p>
+    <p>By: {{this.artists.0.name}}</p>
+    <a href="/album-tracks/{{id}}">View Songs</a>
+  </div>
+  {{/each}}
+</div>

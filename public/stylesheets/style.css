@@ -114,6 +114,7 @@ margin-top: 5px;
 .grid-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  color: black;
   gap: 20px;
   justify-items: center; /* Center grid items horizontally */
 }
@@ -228,4 +229,11 @@ margin-top: 5px;
     color: black;
 
   }
+
+.name-of-song{
+
+  margin: 20px;
+
+
+}
   
