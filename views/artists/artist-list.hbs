@@ -1,14 +1,17 @@
 <h2>Your Created Artists</h2>
 <div class="grid-container">
-  {{#each artists}}
-  <figure class="images-songs">
-    <h3>{{name}}</h3>
-    <p>{{description}}</p>
-    <p>{{genres}}</p>
-    <img src="{{images}}" alt="">
-    <form action="/artists/{{_id}}/delete" method="post">
-      <button type="submit">Delete artist</button>
-    </form>
-  </figure>
-  {{/each}}
-</div>
+    {{#each artists}}
+        <figure class="images-songs">
+            <h3>{{name}}</h3>
+            <p>{{description}}</p>
+            <p>{{genres}}</p>
+            <img src="{{images}}" alt="" />
+            <form action="/artists/{{_id}}/delete" method="post">
+                <button type="submit" class="btn btn-danger">Delete artist</button>
+            </form>
+            <form action="/artists/{{_id}}/edit" method="get">
+                <button type="submit" class="btn btn-primary">Edit artist</button>
+            </form>
+        </figure>
+    {{/each}}
+</div> 

@@ -209,6 +209,40 @@ router.get('/artists', async (req, res)=> {
   }
 })
 
+ // GET route to edit created artist - display form
+ router.get('/artists/:artistId/edit', async (req, res)=> {
+  const {artistId} = req.params
+
+  try {
+    let artistToEdit = await Artist.findById(artistId);
+    res.render('artists/artist-edit.hbs', {artist: artistToEdit})
+  } catch (error) {
+    console.log(error)
+  }
+})
+
+// POST route to make updates on created artist
+router.post('/artists/:artistId/edit', async (req, res)=> {
+  const {artistId} = req.params
+  const {name, genres, description, images} = req.body
+  try {
+    let updatedArtist = await Artist.findByIdAndUpdate(artistId, {name, genres, description, images})
+    res.redirect('/artists')
+  }
+  catch(error) {
+    console.log(error)
+  }
+}) 
+
+
+
+
+
+
+
+
+
+
 // POST route to delete created artist
 router.post('/artists/:artistId/delete', async (req, res)=> {
   const {artistId} = req.params
