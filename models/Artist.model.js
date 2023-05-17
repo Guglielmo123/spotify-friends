@@ -4,8 +4,9 @@ const { Schema, model } = require("mongoose");
 const artistSchema = new Schema(
   {
    name: {type: String},
-   images: {type: Array},
+   images: {type: String},
    genres: {type: Array},
+   description: {type: String},
    external_urls: {type: String}
   },
   {
