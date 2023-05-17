@@ -111,16 +111,35 @@ margin-top: 5px;
   margin-top: 20px;
   
 }
-.images-songs{
-  border-radius: 50%;
-  width: 100px;
-  height: 100px;
-  display: flex;
+.grid-container {
   display: grid;
-  margin-left: 45vw;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  justify-items: center; /* Center grid items horizontally */
+}
+
+.images-songs {
+  display: inline-block;
+  text-align: center; /* Center contents of grid items */
+}
+.grid-container a{
+  color: rgb(123, 7, 173);
+}
+
+.images-songs h5 {
+  margin-top: 20px; /* Remove default margin for heading */
+  color: rgb(15, 20, 16);
+}
+
+.images-songs img {
   margin: 10px 0px;
+  border-radius: 50%;
+  width: 250px;
+  height: 250px;
+}
 
-
+.images-songs a {
+  display: block; /* Add a line break after each link */
 }
 
 .gradient-custom-2 {
@@ -132,4 +151,13 @@ margin-top: 5px;
 
   / W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   background: linear-gradient(to right, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1))
+  }
+
+  .albums-display{
+    display: grid;
+   /*  display: flex;
+    justify-content: center; */
+
+
+
   }
