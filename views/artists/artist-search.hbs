@@ -1,27 +1,24 @@
-<div>
-	{{#each result}}
-		<img
-			class="images-songs"
-			src={{this.images.0.url}}
-			alt=""
-			width="200"
-			height="200"
-		/>
-		<h2>{{this.name}}</h2>
-		<a href="/albums/{{this.id}}">View Albums</a>
+<div class="grid-container">
+  {{#each result}}
+  <figure class="images-songs">
+    <img class="images-songs" src={{this.images.0.url}} alt="" width="200" height="200" />
+    <h2>{{this.name}}</h2>
+    <a href="/albums/{{this.id}}">View Albums</a>
 
-		{{#if isInFavorites}}
-			<p>Added to Favorites</p>
-		{{else}}
-			<form action="/favourites/{{this.id}}" method="post">
-				<button type="submit" class="btn btn-warning">Add to Favourites</button>
-			</form>
-		{{/if}}
-		<form action="/favourites/{{_id}}/delete" method="post">
-			<button type="submit">Delete from Favourites</button>
-		</form>
-	{{/each}}
+    {{#if isInFavorites}}
+    <p>Added to Favorites</p>
+    {{else}}
+    <form action="/favorites/{{this.id}}" method="post">
+      <button type="submit" class="btn btn-warning">Add to Favorites</button>
+    </form>
+    {{/if}}
+    <form action="/favorites/{{this.id}}/delete" method="post">
+      <button type="submit">Delete from Favorites</button>
+    </form>
+  </figure>
+  {{/each}}
 </div>
+
 
 {{!-- <div >
     {{#each result}}
