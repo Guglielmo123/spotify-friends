@@ -165,6 +165,52 @@ margin-top: 5px;
   .your-images-favourites{
     width: 200px;
     height: 200px;
+  }
+  .added-to-favourites{
+    margin: 10px;
+
 
 
   }
+  .favorite-artists-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+  }
+  
+  .favorite-artist {
+    text-align: center;
+  }
+  
+  .favorite-artists-heading {
+    grid-column: 1 / -1;
+    text-align: center;
+  }
+  
+  .artist-image {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+  }
+  
+  .artist-name {
+    margin: 10px 0;
+    font-weight: bold;
+  }
+  
+  .artist-genre {
+    margin: 10px 0;
+    font-weight: bold;
+  }
+  
+  .favorite-artists-grid p:not(.artist-name):not(.artist-genre) {
+    font-weight: normal;
+  }
+  
+  .edit-button{
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+  }
+  

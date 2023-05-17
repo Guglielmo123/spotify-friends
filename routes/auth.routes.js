@@ -155,6 +155,7 @@ router.get("/logout", isLoggedIn, (req, res) => {
 
 router.get("/profile", isLoggedIn, async (req, res) => {
   const myUser = await User.findById(req.session.currentUser._id).populate("favourites")
+
     res.render("auth/profile", {myUser, logged: req.session.currentUser });
   });
 

@@ -6,14 +6,20 @@
     <a href="/albums/{{this.id}}">View Albums</a>
 
     {{#if isInFavorites}}
-    <p>Added to Favorites</p>
+	<div class="added-to-favourites">
+    <button type="button" class="btn btn-success">Added to Favourites</button>
+	</div>
+	<div class="added-to-favourites">
 	  <form action="/favorites-delete/{{this.name}}" method="post">
       <button type="submit">Delete from Favorites</button>
+	  </div>
     </form>
     {{else}}
+	<div class="added-to-favourites">
     <form action="/favorites/{{this.id}}" method="post">
       <button type="submit" class="btn btn-warning">Add to Favorites</button>
     </form>
+	</div>
     {{/if}}
   
   </figure>

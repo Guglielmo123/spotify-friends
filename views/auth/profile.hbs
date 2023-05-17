@@ -5,7 +5,7 @@
         <div class="card">
           <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
             <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
-              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
+              <img src="/images/randomUser.jpg"
                 alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
                 style="width: 150px; z-index: 1">
               
@@ -14,19 +14,30 @@
           <div class="card-body p-4 text-black">
             <div class="mb-5">
               <h2 class="font-italic mb-0">@{{myUser.username}}</h2>
+              <div class="edit-button">
               <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark"
                 style="z-index: 1;">
                 Edit profile
               </button>
-              <div class="p-4" style="background-color: #f8f9fa;">
-               
-                <h4>Your Favorite Artists</h4>
-                {{#each myUser.favourites}}
-                <p>Name of Artist: {{this.name}}</p>
-                <p>Genre: {{this.genres}}</p>
-                <img class="your-images-favourites" src="{{this.images}}" alt="">
-                {{/each}}
               </div>
+              <div>
+                <h5>User Details:</h5>
+                <p><span><strong>Email:</strong></span><br>{{myUser.email}}</p>
+                <p><span><strong>Account Created:</strong><br></span>{{myUser.createdAt}}</p>
+
+              </div>
+ <div class="favorite-artists-grid p-4" style="background-color: #f8f9fa;">
+  <h4 class="favorite-artists-heading">Your Favorite Artists</h4>
+  {{#each myUser.favourites}}
+  <div class="favorite-artist">
+    <p><strong>{{this.name}}</strong></p>
+     <p><span class="artist-genre">Genre:</span> {{this.genres}}</p>
+    <img class="artist-image" src="{{this.images}}" alt="">
+  </div>
+  {{/each}}
+</div>
+
+
             </div>
           </div>
         </div>
