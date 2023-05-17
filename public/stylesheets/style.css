@@ -213,4 +213,19 @@ margin-top: 5px;
     margin-bottom: 10px;
 
   }
+
+  .form-create-artist{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+  }
+  .labels-form-create{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin: 10px;
+    color: black;
+
+  }
   
