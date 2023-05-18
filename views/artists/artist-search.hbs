@@ -1,4 +1,5 @@
 <div class="grid-container">
+ 
   {{#each result}}
   <figure class="images-songs">
     <img class="images-songs" src={{this.images.0.url}} alt="" width="200" height="200" />
@@ -25,6 +26,14 @@
   </figure>
   {{/each}}
 </div>
+
+ {{#each database}}
+<h3 class="title-artistsss">Your Created Artists:</h3>
+ <div class="space-for-images" >  	
+	<img class="images-your-created-artists" src={{this.images}} alt="" width="200" height="200" />
+	<h2 class="titles-titles">{{this.name}}</h2>
+</div>
+ {{/each}}
 
 
 {{!-- <div >

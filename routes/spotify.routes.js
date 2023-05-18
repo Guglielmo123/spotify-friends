@@ -19,18 +19,10 @@ for (let j=0; j<myUser.favourites.length; j++){
   }
 }
 }
-
-		/* let isInFavorites;
-
-const favouriteIds = isFav.map(fav => fav._id);
-const artistsIds = response.body.artists.items.map(artist => ({
-  ...artist,
-  isInFavorites: favouriteIds.includes(artist.id)
-}));
- */
+let allArtistsInDb = await Artist.find({name: { $regex: req.query.characters, $options: "i" }});
 
 		res.render("artists/artist-search.hbs", {
-			result: response.body.artists.items, logged: req.session.currentUser 
+			result: response.body.artists.items, logged: req.session.currentUser, database: allArtistsInDb
 		});
 		//console.log(response.body.artists.items)
 	} catch (error) {

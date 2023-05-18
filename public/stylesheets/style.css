@@ -279,3 +279,29 @@ margin-top: 5px;
   margin: 10px 0px;
 
 }
+.images-your-created-artists{
+  border-radius: 50%;
+
+
+}
+.title-artistsss{
+  color: purple;
+  text-align: center;
+  margin: 20px 0px;
+  font-weight: bold;
+  text-decoration: underline dashed;
+
+
+}
+
+.titles-titles{
+  color: black;
+  margin: 20px 0px;
+
+
+}
+
+.space-for-images{
+    margin: 20px 0px;
+
+}
