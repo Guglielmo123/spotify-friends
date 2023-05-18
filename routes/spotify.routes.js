@@ -178,6 +178,7 @@ console.log(selectedArtist)
 
 // CREATE a new artist - display the form
 router.get('/artists/create', (req, res)=>{
+  
   res.render('artists/artist-create.hbs', {logged: req.session.currentUser })
 })
 
