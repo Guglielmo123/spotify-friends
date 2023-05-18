@@ -26,7 +26,7 @@ const userSchema = new Schema(
 				ref: "Artist",
 			},
 		],
-    comments: [
+		comments: [
 			{
 				type: Schema.Types.ObjectId,
 				ref: "Comment",
