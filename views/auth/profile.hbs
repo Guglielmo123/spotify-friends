@@ -12,19 +12,21 @@
             </div>
             </div>
           <div class="card-body p-4 text-black">
-            <div class="mb-5">
+            <div class="mb-5 space-in-artist">
               <h2 class="font-italic mb-0">@{{myUser.username}}</h2>
+              <div class="space-in-artist">
+              <a href="/artists">See Your Created Artists</a>
+              </div>
               <div class="edit-button">
               <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark"
                 style="z-index: 1;">
                 Edit profile
               </button>
               </div>
-              <div>
+              <div >
                 <h5>User Details:</h5>
                 <p><span><strong>Email:</strong></span><br>{{myUser.email}}</p>
                 <p><span><strong>Account Created:</strong><br></span>{{myUser.createdAt}}</p>
-
               </div>
  <div class="favorite-artists-grid p-4" style="background-color: #f8f9fa;">
   <h4 class="favorite-artists-heading">Your Favorite Artists</h4>
