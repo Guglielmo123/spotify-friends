@@ -4,11 +4,27 @@
     <label class="labels-form-create">Description:<textarea type="text" name="description" cols="30" rows="4"></textarea></label>
     <label class="labels-form-create">Image URL:<input type="text" name="images"></label>
 
-
-  
-
     <button type="submit" class="btn btn-primary">Create</button>
 </form>
+
+
+
+
+
+
+{{!-- <!-- Display all the Reviews of the Book that we're seeing -->
+    {{#each book.reviews}}
+    <div>
+        <!-- Actually displaying the review -->
+        <p><span>By {{author.username}}</span>: {{content}}</p>
+        <!-- Deleting the Review -->
+        <form action="/review/delete/{{_id}}" method="post">
+            <button type="submit">Delete</button>
+        </form>
+    </div>
+    {{/each}}
+
+<a href="/books">Back</a> --}}
 
 
 

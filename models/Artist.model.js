@@ -11,7 +11,11 @@ const artistSchema = new Schema(
    userCreated: {
     type: Boolean,
     default: false
-   }
+   },
+   comments: [{
+    type: Schema.Types.ObjectId, 
+    ref: 'Comment'
+ }]
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`

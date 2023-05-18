@@ -1,0 +1,14 @@
+<h4>Comment on the artist</h4>
+
+<form action="/comments/{{foundArtist.body.id}}" method="post">
+	<p>{{foundArtist.body.name}}</p>
+	<p> By {{user.username}}</p>
+
+	<label for="content">Content
+		<textarea name="content" id="content" cols="30" rows="5"></textarea>
+	</label>
+	<label for="rating">Rating
+		<input name="rating" id="rating" type="number" min="1" max="5" />
+	</label>
+	<button type="submit">Create the comment</button>
+</form>

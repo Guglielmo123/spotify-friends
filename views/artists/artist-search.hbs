@@ -12,8 +12,8 @@
 	<div class="added-to-favourites">
 	  <form action="/favorites-delete/{{this.name}}" method="post">
       <button type="submit" class="btn btn-danger">Delete from Favorites</button>
-	  </div>
     </form>
+     </div>
     {{else}}
 	<div class="added-to-favourites">
     <form action="/favorites/{{this.id}}" method="post">
@@ -21,7 +21,9 @@
     </form>
 	</div>
     {{/if}}
-  
+   <div class="added-to-favourites">
+    <a href="/comments/{{this.id}}">Leave a Comment</a>
+	</div>
   </figure>
   {{/each}}
 </div>
