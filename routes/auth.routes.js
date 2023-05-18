@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+// ********* require fileUploader in order to use it *********
+const fileUploader = require('../config/cloudinary.config');
 
 // ℹ️ Handles password encryption
 const bcrypt = require("bcrypt");
@@ -158,5 +160,36 @@ router.get("/profile", isLoggedIn, async (req, res) => {
 
     res.render("auth/profile", {myUser, logged: req.session.currentUser });
   });
+
+  router.get("/profile/edit", isLoggedIn, async (req, res) => {
+    let userId = req.session.currentUser._id;
+    
+    const myUser = await User.findById(userId)
+      res.render("auth/edit-profile.hbs", {myUser, logged: req.session.currentUser });
+    });
+
+    router.post('/edit-profile',  isLoggedIn, async (req, res)=> {
+
+      let userId = req.session.currentUser._id;
+
+      try {
+        if(!req.file){
+          const profilePic = await User.findById(userId).profilePic;
+          const updateUserInfo = await User.findByIdAndUpdate(userId,{profilePic})
+      }
+      else{
+          const updateUserInfo = await User.findByIdAndUpdate(userId,{profilePic:req.file.path})
+      }
+      res.redirect('/')
+
+      } catch (error) {
+        console.log(error)
+        res.redirect('/profile/edit')
+      }
+
+
+
+    })
+
 
 module.exports = router;

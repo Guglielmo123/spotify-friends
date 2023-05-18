@@ -16,6 +16,12 @@ const userSchema = new Schema(
       trim: true,
       lowercase: true,
     },
+profilePic: {
+  type: String,
+  default: "/images/randomUser.jpg"
+
+},
+
     password: {
       type: String,
       required: true,
