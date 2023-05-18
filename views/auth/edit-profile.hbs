@@ -1,8 +1,51 @@
-<p>Edit your Profile Pic</p>
-<form action="/auth/profile/edit" method="post" enctype="multipart/form-data">
-<label>Image: </label>
-    <input type="file" name="profile-pic"/>
-    <!-- <input type="text" name="existingImage" hidden value="{{imageUrl}}"> -->
-<button type="submit">Save Changes</button>
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+    }
 
-</form>
+    p {
+      background-color: inherit;
+      color: black;
+    }
+
+    form {
+      display: inline-block;
+      margin-top: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    input[type="file"] {
+      margin-bottom: 20px;
+    }
+
+    button[type="submit"] {
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #178653;
+    }
+  </style>
+</head>
+<body>
+  <p class="edit-your-profile-pic">Edit your Profile Picture:</p>
+  <form action="/auth/profile/edit" method="post" enctype="multipart/form-data">
+    <input type="file" name="profile-pic">
+    <!-- <input type="text" name="existingImage" hidden value="{{imageUrl}}"> -->
+    <button type="submit">Save Changes</button>
+  </form>
+</body>
+</html>

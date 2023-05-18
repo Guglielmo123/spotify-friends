@@ -65,15 +65,14 @@
 								class="favorite-artists-grid p-4"
 								style="background-color: #f8f9fa;"
 							>
-								<h4 class="favorite-artists-heading">Your Favorite
-									Artists</h4>
+								<h4 class="favorite-artists-heading">Your Comments</h4>
 
 								{{#each myUser.comments}}
 									<div class="favorite-artist">
 										<p><strong>{{this.spotifyArtist}}</strong></p>
-										<p><strong>{{this.content}}</strong></p>
-										<p><span class="artist-genre">Rating:</span>
-											{{this.rating}}</p>
+										<p><span><strong>You Commented:</strong><br></span>{{this.content}}</p>
+										<p ><span class="artist-genre">Rating:</span><span class="colour-span">
+											{{this.rating}}/5</span></p>
 										{{!-- <form action="/favorites-delete/{{this.name}}" method="post">
       <button type="submit" class="btn btn-danger">Delete from Favorites</button>
     </form> --}}
