@@ -1,8 +1,8 @@
-<form action="/edit-profile" method="post" enctype="multipart/form-data">
-
-<p>HELLO</p>
+<p>Edit your Profile Pic</p>
+<form action="/auth/profile/edit" method="post" enctype="multipart/form-data">
 <label>Image: </label>
- <input type="file" name="profilePic" value="{{user.imgSrc}}">
-<button type="submit"> save Changes</button>
+    <input type="file" name="profile-pic"/>
+    <!-- <input type="text" name="existingImage" hidden value="{{imageUrl}}"> -->
+<button type="submit">Save Changes</button>
 
 </form>

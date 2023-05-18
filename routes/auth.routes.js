@@ -176,27 +176,29 @@ router.get("/profile", isLoggedIn, async (req, res) => {
       res.render("auth/edit-profile.hbs", {myUser, logged: req.session.currentUser });
     });
 
-    router.post('/edit-profile',  isLoggedIn, async (req, res)=> {
+    router.post('/profile/edit', fileUploader.single('profile-pic'), isLoggedIn, async (req, res)=> {
 
-      let userId = req.session.currentUser._id;
+      const {existingImage} = req.body;
+
+      let imageUrl;
+
+      if(req.file){
+          imageUrl = req.file.path;
+      } else {
+          return;
+      }
 
       try {
-        if(!req.file){
-          const profilePic = await User.findById(userId).profilePic;
-          const updateUserInfo = await User.findByIdAndUpdate(userId,{profilePic})
+        if(imageUrl){
+          let userId = req.session.currentUser._id;
+          await User.findByIdAndUpdate(userId, {profilePic: imageUrl}, {new: true});
+          res.redirect('/auth/profile');
       }
-      else{
-          const updateUserInfo = await User.findByIdAndUpdate(userId,{profilePic:req.file.path})
-      }
-      res.redirect('/')
-
-      } catch (error) {
+    }
+      catch (error) {
         console.log(error)
-        res.redirect('/profile/edit')
+        res.redirect('/profile')
       }
-
-
-
     })
 
 

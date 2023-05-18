@@ -20,6 +20,10 @@ const userSchema = new Schema(
 			type: String,
 			required: true,
 		},
+    profilePic: {
+      type: String, 
+      default: '/images/randomUser.jpg'
+    },
 		favourites: [
 			{
 				type: Schema.Types.ObjectId,
