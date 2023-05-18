@@ -15,7 +15,7 @@
             <div class="mb-5 space-in-artist">
               <h2 class="font-italic mb-0">@{{myUser.username}}</h2>
               <div class="space-in-artist">
-              <a href="/artists">See Your Created Artists</a>
+            
               </div>
               <div class="edit-button">
               <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark"
@@ -23,7 +23,10 @@
                 Edit profile
               </button>
               </div>
-              <div >
+              <div class="see-your-created-artists">
+                <a href="/artists">See Your Created Artists</a>
+              </div>  
+              <div>
                 <h5>User Details:</h5>
                 <p><span><strong>Email:</strong></span><br>{{myUser.email}}</p>
                 <p><span><strong>Account Created:</strong><br></span>{{myUser.createdAt}}</p>
