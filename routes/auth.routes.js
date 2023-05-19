@@ -154,7 +154,7 @@ router.get("/logout", isLoggedIn, (req, res) => {
 			return;
 		}
 
-		res.redirect("/");
+		res.redirect("/auth/login");
 	});
 });
 
@@ -185,7 +185,7 @@ router.get("/profile", isLoggedIn, async (req, res) => {
       if(req.file){
           imageUrl = req.file.path;
       } else {
-          return;
+          imageUrl = "/images/randomUser.jpg";
       }
 
       try {

@@ -302,7 +302,7 @@ router.post("/comments/:artistId", (req, res) => {
 				$push: { comments: newComment._id },
 			});
 
-			res.redirect("/");
+			res.redirect("/auth/profile");
 		} catch (error) {
 			console.log(error);
 		}
