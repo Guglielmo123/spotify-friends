@@ -325,3 +325,38 @@ margin-top: 5px;
 
 
 }
+
+.center-stuff{
+
+  text-align: center;
+  color: black;
+  margin-top: 20px;
+  font-weight: bold;
+
+
+}
+
+#comment-form{
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  flex-direction: column  ;
+
+  margin: 10px 0px;
+
+
+}
+
+#comment-form label {
+  margin: 15px 0px;
+
+
+
+}
+#comment-form span{
+  text-decoration: underline;
+
+
+}
