@@ -360,3 +360,17 @@ margin-top: 5px;
 
 
 }
+
+.see-your-created-artists{
+
+  margin: 10px 0px;
+  color: blue;
+
+}
+.remove-underline-button{
+  text-decoration: none;
+  color: white;
+
+
+
+}
